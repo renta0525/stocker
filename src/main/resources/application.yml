@@ -1,0 +1,50 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stocker
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: purchase-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  # kafka:
+  #   bootstrap-servers: localhost:9092
+  #   consumer:
+  #     group-id: stock-consumer-group
+  #     auto-offset-reset: earliest
+  #     key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  #     value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+  #     properties:
+  #       spring.json.trusted.packages: '*'
+  #   producer:
+  #     key-serializer: org.apache.kafka.common.serialization.StringSerializer
+  #     value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+server:
+  servlet:
+    context-path: /stocker
+  error:
+    whitelabel:
+      enabled: false
+    path: /error
+
+file:
+  upload-dir: upload/images
+
+notification:
+  slack:
+    webhook-url: https://hooks.slack.com/services/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

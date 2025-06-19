@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>店舗情報編集</h2>
+    <p th:if="${successMessage}" th:text="${successMessage}" style="color: green;"></p>
+    <form th:action="@{/list/shop/{id}/update(id=${shopDetailEdit.id})}" th:object="${shopDetailEdit}" method="post">
+        <input type="hidden" th:field="*{id}"> 
+        <label for="name">店舗名:</label>
+        <input type="text" id="name" th:field="*{name}" /><br/>
+        <label for="imagePath">画像パス:</label>
+        <input type="text" id="imagePath" th:field="*{imagePath}" /><br/>
+        <button type="submit" >更新</button>
+    </form>
+    <br/>
+    <form th:action="@{/list/shop/{id}/delete(id=${shopDetailEdit.id})}" method="post">
+        <button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
+    </form>
+    <form th:action="@{/list/shops}" method="get">
+        <button type="submit">一覧に戻る</button>
+    </form>
+</body>
+</html>

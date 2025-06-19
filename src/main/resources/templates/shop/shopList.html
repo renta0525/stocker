@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>店舗一覧</h2>
+     <ul>
+        <li th:each = "shop : ${shoplist}">
+            <p th:text = "${shop.name}">店舗名</p>
+            <form th:action="@{/stockList/{id}(id=${shop.id})}" method="get">
+                <button type="submit">在庫確認</button>
+            </form>
+            <form th:action="@{/list/shop/{id}/edit-form(id=${shop.id})}" method="get">
+                <button type="submit">店舗情報編集</button>
+            </form>
+        </li>
+     </ul>
+</body>
+</html>

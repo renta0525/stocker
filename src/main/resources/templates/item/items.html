@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>商品一覧</h2>
+    <div th:each="stock : ${stockList}">
+        <h3 th:text="${stock.name}">商品名</h3>
+        <p th:text="'価格: ￥' + ${stock.price}"></p>
+        <p th:text="${stock.memo}">商品説明</p>
+        <p th:text="'残り: ' + ${stock.quantity} + ' 個'"></p>
+        <img th:src="@{/${stock.imagePath}}" alt="商品画像" width="150" />
+
+        <form th:action="@{/order/purchase}" method="post">
+            <input type="hidden" name="itemId" th:value="${stock.id}" />
+            <label>購入数: <input type="number" name="quantity" min="1" value="1" required /></label><br/>
+            <label>お名前: <input type="text" name="userName" required /></label><br/>
+            <button type="submit">購入</button>
+        </form>
+        <hr/>
+    </div>
+</body>
+</html>

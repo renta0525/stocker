@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>在庫一覧</h3>
+    <table>
+        <tr><th>商品名</th><th>金額</th><th>数量</th><th>メモ</th><th>操作</th></tr>
+        <tr th:each="stock : ${stockList}" th:class="${stock.quantity} <= ${stock.boundaryValue} ? 'low-stock' : ''">
+            <td th:text="${stock.name}">商品名</td>
+            <td th:text="${stock.price}">金額</td>
+            <td th:text="${stock.quantity}">数量</td>
+            <td th:text="${stock.memo}">メモ</td>
+            <td>
+                <form th:action="@{/stockList/{id}/edit-form(id=${stock.id})}" method="get">
+                    <button type="submit">編集</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+<style>
+    .low-stock {
+        background-color: #ffe0e0;
+        font-weight: bold;
+    }
+</style>
+</html>

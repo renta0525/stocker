@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>❌ エラー</h2>
+    <p th:text="${error}">エラー内容</p>
+    <p><a th:href="@{/order}">商品一覧に戻る</a></p>
+</body>
+</html>
