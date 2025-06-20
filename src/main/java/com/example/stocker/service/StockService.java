@@ -29,4 +29,8 @@ public class StockService {
     public void updateByStock (Stock stock) {
         repository.updateByStock(stock);
     }
+
+    public void insertStock(Stock stock) {
+        repository.insertStock(stock);
+    }
 }

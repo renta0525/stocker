@@ -32,6 +32,7 @@ public class StockController {
     public String showStocks (@PathVariable("shopId") int shopId, Model model) {
         List<Stock> stockList = stockService.findByShopId(shopId);
         model.addAttribute("stockList", stockList);
+        model.addAttribute("shopId", shopId);
         return "stock/stockList";
     }
 
@@ -40,6 +41,31 @@ public class StockController {
         Stock stockDetailEdit = stockService.findById(id).orElseThrow();
         model.addAttribute("stockDetailEdit", stockDetailEdit);
         return "stock/stockDetailEdit";
+    }
+
+    @GetMapping("/{shopId}/add-form")
+    public String showAddForm(@PathVariable("shopId") int shopId, Model model) {
+        StockForm form = new StockForm();
+        form.setShopId(shopId);
+        model.addAttribute("stockForm", form);
+        return "stock/stockAdd";
+    }
+
+    @PostMapping("/{shopId}/add")
+    public String addStock(@PathVariable("shopId") int shopId, StockForm form, RedirectAttributes redirectAttributes) {
+        Stock stock = new Stock();
+        stock.setName(form.getName());
+        stock.setPrice(form.getPrice());
+        stock.setQuantity(form.getQuantity());
+        stock.setMemo(form.getMemo());
+        stock.setBoundaryValue(form.getBoundaryValue());
+        stock.setImagePath(form.getImagePath());
+        stock.setShopId(shopId);
+        stock.setCategoryId(form.getCategoryId());
+        stockService.insertStock(stock);
+
+        redirectAttributes.addFlashAttribute("successMessage", "登録しました");
+        return "redirect:/stockList/" + shopId;
     }
 
     @PostMapping("/{id}/update")
