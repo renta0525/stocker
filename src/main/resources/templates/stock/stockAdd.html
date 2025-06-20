@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Add</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+    <h2>商品登録</h2>
+    <p th:if="${successMessage}" th:text="${successMessage}" style="color: green;"></p>
+    <form th:action="@{/stockList/{shopId}/add(shopId=${stockForm.shopId})}" th:object="${stockForm}" method="post">
+        <input type="hidden" th:field="*{shopId}" />
+        <label for="name">商品名：</label>
+        <input type="text" id="name" th:field="*{name}" /><br/>
+        <label for="price">金額：</label>
+        <input type="text" id="price" th:field="*{price}" /><br/>
+        <label for="quantity">数量：</label>
+        <input type="number" id="quantity" th:field="*{quantity}" /><br/>
+        <label for="categoryId">カテゴリID：</label>
+        <input type="number" id="categoryId" th:field="*{categoryId}" /><br/>
+        <label for="boundaryValue">閾値：</label>
+        <input type="number" id="boundaryValue" th:field="*{boundaryValue}" /><br/>
+        <label for="memo">メモ：</label>
+        <textarea id="memo" th:field="*{memo}"></textarea><br/>
+        <label for="imagePath">画像パス：</label>
+        <input type="text" id="imagePath" th:field="*{imagePath}" /><br/>
+        <button type="submit">登録</button>
+    </form>
+    <br/>
+    <form th:action="@{/stockList/{shopId}(shopId=${stockForm.shopId})}" method="get">
+        <button type="submit">一覧に戻る</button>
+    </form>
+</body>
+</html>

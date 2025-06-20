@@ -2,6 +2,8 @@ package com.example.stocker.form;
 
 public class StockForm {
     private int id;
+    private int shopId;
+    private int categoryId;
     private String name;
     private int price;
     private int quantity;
@@ -14,6 +16,18 @@ public class StockForm {
     }
     public void setId(int id) {
         this.id = id;
+    }
+    public int getShopId() {
+        return shopId;
+    }
+    public void setShopId(int shopId) {
+        this.shopId = shopId;
+    }
+    public int getCategoryId() {
+        return categoryId;
+    }
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
     public String getName() {
         return name;

@@ -81,4 +81,23 @@ public class StockRepository {
                                     .addValue("id", stock.getId());
         template.update(sql, param);
     }
+
+    /**
+     * stockの追加
+     * @param stock
+     */
+    public void insertStock(Stock stock) {
+        String sql = "INSERT INTO stocks (name, price, quantity, shop_id, category_id, memo, boundary_value, image_path) "
+                   + "VALUES (:name, :price, :quantity, :shopId, :categoryId, :memo, :boundaryValue, :imagePath)";
+        SqlParameterSource param = new MapSqlParameterSource()
+                                    .addValue("name", stock.getName())
+                                    .addValue("price", stock.getPrice())
+                                    .addValue("quantity", stock.getQuantity())
+                                    .addValue("shopId", stock.getShopId())
+                                    .addValue("categoryId", stock.getCategoryId())
+                                    .addValue("memo", stock.getMemo())
+                                    .addValue("boundaryValue", stock.getBoundaryValue())
+                                    .addValue("imagePath", stock.getImagePath());
+        template.update(sql, param);
+    }
 }

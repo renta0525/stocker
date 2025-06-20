@@ -8,6 +8,10 @@
 </head>
 <body>
     <h3>在庫一覧</h3>
+    <p th:if="${successMessage}" th:text="${successMessage}" style="color: green;"></p>
+    <form th:action="@{/stockList/{shopId}/add-form(shopId=${shopId})}" method="get">
+        <button type="submit">商品追加</button>
+    </form>
     <table>
         <tr><th>商品名</th><th>金額</th><th>数量</th><th>メモ</th><th>操作</th></tr>
         <tr th:each="stock : ${stockList}" th:class="${stock.quantity} <= ${stock.boundaryValue} ? 'low-stock' : ''">
