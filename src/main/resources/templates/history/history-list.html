@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head> 
+<body>
+    <h2>📜 通知履歴</h2>
+
+    <form th:action="@{/messages/search}" method="get" th:object="${historyForm}">
+        <input type="text" th:field="*{message}" placeholder="キーワード">
+        <input type="number" th:field="*{stockId}" placeholder="商品ID">
+        <input type="date" th:field="*{fromDate}">
+        <input type="date" th:field="*{toDate}">
+        <button type="submit">検索</button>
+    </form>
+
+    <a th:href="@{/list/shops}">
+        <button type="button">店舗一覧に戻る</button>
+    </a>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>商品ID</th>
+            <th>メッセージ</th>
+            <th>通知日時</th>
+        </tr>
+        <tr th:each="msg : ${messageHistoryList}">
+            <td th:text="${msg.id}"></td>
+            <td th:text="${msg.stockId}"></td>
+            <td th:text="${msg.message}"></td>
+            <td th:text="${#temporals.format(msg.createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
+        </tr>
+    </table>
+</body>
+</html>

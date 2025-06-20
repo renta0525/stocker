@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,11 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 <body>
+    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+        <form th:action="@{/messages}" method="get">
+            <button type="submit">🔔 通知履歴（管理者）</button>
+        </form>
+    </div>
     <h2>店舗一覧</h2>
      <ul>
         <li th:each = "shop : ${shoplist}">
